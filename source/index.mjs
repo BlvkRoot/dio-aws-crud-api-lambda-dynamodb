@@ -5,6 +5,7 @@ import {
   PutCommand,
   GetCommand,
   DeleteCommand,
+  UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
@@ -64,7 +65,7 @@ export const handler = async(event) => {
              requestJSON = JSON.parse(event.body);
             await dynamo
               .send(
-                new PutCommand({
+                new UpdateCommand({
                   TableName: tableName,
                   Key: {
                     id: event.pathParameters.id
@@ -72,7 +73,7 @@ export const handler = async(event) => {
                   UpdateExpression: 'set price = :price',
                   ExpressionAttributeValues: {
                    ':price': requestJSON.price,
-                  },
+                  }
               }));
             body = `Put item ${event.pathParameters.id}`;
             break;
