@@ -8,11 +8,8 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
-
 const dynamo =  DynamoDBDocumentClient.from(client);
-
 const tableName = "Products";
-
 
 export const handler = async(event) => {
     let body;
@@ -20,7 +17,6 @@ export const handler = async(event) => {
     const headers = {
         "Content-Type": "application/json"
     };
-    
     let requestJSON;
     
     try {
